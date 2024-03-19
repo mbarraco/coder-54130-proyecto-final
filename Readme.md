@@ -21,4 +21,5 @@
     ```bash
     python manage.py startapp <nomre de su aplicacion>
     ```
+4. Creamos un archivo que se llame `urls.py` en `MeetingRooms/bookings/urls.py`
 
