@@ -19,7 +19,12 @@
     ```
 3. Crear una `application` dentro de mi proyecto:
     ```bash
-    python manage.py startapp <nomre de su aplicacion>
+    python manage.py startapp <nombre de su aplicacion>
     ```
-4. Creamos un archivo que se llame `urls.py` en `MeetingRooms/bookings/urls.py`
+4. Creamos un archivo que se llame `urls.py` en `<nombre_del_proyecto>/<nombre_de_su_aplicacion>/urls.py`. En mi caso sería: `MeetingRooms/bookings/urls.py`
 
+
+## Templates
+
+1. Crear un template y guardarlo en el lugar adecuado
+2. Utilizar la función `render`
