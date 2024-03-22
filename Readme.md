@@ -28,3 +28,10 @@
 
 1. Crear un template y guardarlo en el lugar adecuado
 2. Utilizar la función `render`
+
+## Modelos
+
+Después de agregar o modificar un modelo en `models.py` tenemos que correr 2 comandos:
+
+1. `python manage.py makemigrations`
+2. `python manage.py migrate`
