@@ -21,12 +21,12 @@ from django.urls import path, include
 from django.http import HttpResponse
 
 
-def mi_func(xx):
+def mi_funcion_que_es_una_vista_o_view(xx):
     return HttpResponse("<h1>Bienvenidos a mi Proyecto</h1>")
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", mi_func),
+    path("", mi_funcion_que_es_una_vista_o_view),
     path("bookings/", include("bookings.urls")), # conecto las URLS de `bookings` con las URLS generales
 ]

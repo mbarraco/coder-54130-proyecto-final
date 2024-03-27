@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}xxxxx{% endblock title %}</title>
+    <title>{% block title %} xxxxx {% endblock title %}</title>
     <!-- Bootstrap CSS CDN (Bootstrap 4 used as an example) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'questions/css/style.css' %}">
 </head>
 <body>
     <!-- Navbar -->
@@ -19,7 +18,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/reservas">Todas las <Ri:a></Ri:a>eservas</a>
+                    <a class="nav-link" href="/bookings/list">Todas las Reservas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bookings-list' %}">XXXXXX</a>
                 </li>
             </ul>
         </div>
