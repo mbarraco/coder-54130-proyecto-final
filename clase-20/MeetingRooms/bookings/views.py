@@ -9,19 +9,9 @@ def home_view(request):
     return render(request, "bookings/home.html")
 
 
-# def list_view(request):
-#     contexto_dict = {
-#         'reservas': [
-#             {"usuario": "Emiliano Martínez ", "sala": "aruba"},
-#             {"usuario": "Nicolas Otamendi ", "sala": "italia"},
-#             {"usuario": "Nahuel Molina ", "sala": "multisala"},
-#         ]
-#     }
-#     return render(request, "bookings/list.html", contexto_dict)
-
 def list_view(request):
     reservas = Reserva.objects.all()
-    contexto_dict = {'reservas': reservas}
+    contexto_dict = {'todas_las_reservas': reservas}
     return render(request, "bookings/list.html", contexto_dict)
 
 

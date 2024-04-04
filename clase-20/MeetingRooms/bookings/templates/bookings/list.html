@@ -1,18 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'bookings/base.html' %}
 
 {% block title %} Listado de Reservas {% endblock %}
 
 {% block content %}
-<section>
-    <h2>Reservas</h2>
-    <div class="reservas-list">
-        {% for reserva in reservas %}
-            <div class="discussion-item">
-                <p><a href="http://google.com">{{ reserva }}</a></p>
-            </div>
-        {% empty %}
-            <p>No hay Reservas disponibles.</p>
-        {% endfor %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">Reservas</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for reserva in todas_las_reservas %}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ reserva.nombre_de_usuario }}</h5>
+                            <p class="card-text">Sala: {{ reserva.sala }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="http://google.com" class="btn btn-primary">Ver Reserva</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col">
+                    <p>No hay Reservas disponibles.</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}
