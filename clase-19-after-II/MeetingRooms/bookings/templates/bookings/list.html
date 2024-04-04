@@ -1,0 +1,18 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %} Listado de Reservas {% endblock %}
+
+{% block content %}
+<section>
+    <h2>Reservas</h2>
+    <div class="reservas-list">
+        {% for reserva in reservas %}
+            <div class="discussion-item">
+                <p><a href="http://google.com">Usuario: {{ reserva.nombre_de_usuario}} - Sala: {{reserva.sala}}</a></p>
+            </div>
+        {% empty %}
+            <p>No hay Reservas disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
