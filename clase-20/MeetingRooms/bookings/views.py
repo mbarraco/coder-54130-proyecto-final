@@ -21,11 +21,6 @@ def search_view(request, nombre_de_usuario):
     return render(request, "bookings/list.html", contexto_dict)
 
 
-def create_view(request, nombre_de_usuario, sala):
-    reserva = Reserva.objects.create(nombre_de_usuario=nombre_de_usuario, sala=sala)
-    return HttpResponse(f"resultado: {reserva}")
-
-
 def detail_view(request, booking_id):
     reserva = Reserva.objects.get(id=booking_id)
     contexto_dict = {"reserva": reserva}
