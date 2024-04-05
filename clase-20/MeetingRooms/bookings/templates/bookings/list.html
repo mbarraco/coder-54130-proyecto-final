@@ -6,25 +6,38 @@
 <section class="py-5">
     <div class="container">
         <h2 class="mb-4">Reservas</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for reserva in todas_las_reservas %}
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ reserva.nombre_de_usuario }}</h5>
-                            <p class="card-text">Sala: {{ reserva.sala }}</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="http://google.com" class="btn btn-primary">Ver Reserva</a>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <div class="col">
-                    <p>No hay Reservas disponibles.</p>
-                </div>
-            {% endfor %}
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de Usuario</th>
+                    <th scope="col">Sala</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora de Inicio</th>
+                    <th scope="col">Hora de Fin</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in todas_las_reservas %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ reserva.nombre_de_usuario }}</td>
+                    <td>{{ reserva.sala }}</td>
+                    <td>{{ reserva.fecha | date:"Y-m-d" }}</td>
+                    <td>{{ reserva.hora_inicio | date:"H:i" }}</td>
+                    <td>{{ reserva.hora_fin | date:"H:i" }}</td>
+                    <td>
+                        <a href="/bookings/detail/{{ reserva.id }}" class="btn btn-primary btn-sm">Ver</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No hay Reservas disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </section>
 {% endblock %}
