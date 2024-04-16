@@ -3,13 +3,14 @@ from django.shortcuts import render, redirect
 from .forms import ReservaCreateForm, ReservaSearchForm, SalaCreateForm
 from .models import Reserva, Sala
 
+from django.contrib.auth.decorators import login_required
 
 
 def create_with_form_view(request):
     contexto = {"create_form": ReservaCreateForm() }
     return render(request, "bookings/form-create.html", contexto)
 
-
+@login_required
 def create_sala_with_form_view(request):
     if request.method == "GET":
         contexto = {"LUISMIGUEL": SalaCreateForm()}
@@ -74,6 +75,8 @@ def detail_sala_view(request, sala_id):
 # CRUD
 from django.http import HttpResponse
 
+
+@login_required
 def sala_list_view(request):
     todas_las_salas = Sala.objects.all()
     contexto = {"SANTIAGOMOTORIZADO": todas_las_salas}
@@ -115,7 +118,7 @@ def sala_update_view(request, sala_id):
             sala_a_editar.save()
             return redirect("sala-detail", sala_a_editar.id)
 
-
+@login_required
 def search_sala_view(request):
     return HttpResponse("not implemented!")
 
@@ -157,3 +160,51 @@ class SalaDeleteView(DeleteView):
     model = Sala
     template_name = 'bookings/vbc/sala_confirm_delete.html'
     success_url = reverse_lazy('vbc_sala_list')
+
+
+
+# -----------------------------------------------------------------------------
+# CLASE 23
+# -----------------------------------------------------------------------------
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+
+def user_login_view(request):
+    if request.method == "GET":
+        form = AuthenticationForm()
+    elif request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            user = form.user_cache
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+
+    return render(request, 'bookings/login.html', {'MICHAELSTIPE': form})
+
+
+from django.contrib.auth.forms import UserCreationForm
+
+def user_creation_view(request):
+    if request.method == "GET":
+        form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        breakpoint()
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+
+    return render(request, 'bookings/crear_usuario.html', {'form': form})
+
+
+
+from django.contrib.auth import logout
+
+
+def user_logout_view(request):
+    logout(request)
+    return redirect("login")

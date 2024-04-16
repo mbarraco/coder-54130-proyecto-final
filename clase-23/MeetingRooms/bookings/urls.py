@@ -22,11 +22,17 @@ from .views import (
     SalaDetailView,
     SalaDeleteView,
     SalaUpdateView,
-    SalaCreateView
+    SalaCreateView,
+    # -----------------------------------------------------------------------------
+    # CLASE 23
+    # -----------------------------------------------------------------------------
+    user_login_view,
+    user_creation_view,
+    user_logout_view
 )
 
 urlpatterns = [
-    path("", home_view),
+    path("", home_view, name="home"),
     path("detail/<booking_id>", detail_view),
     path("list/", list_view, name="bookings-list"),
     path("buscar/<nombre_de_usuario>", search_view),
@@ -51,5 +57,10 @@ urlpatterns = [
     path('sala/vbc/<int:pk>/detail', SalaDetailView.as_view(), name='vbc_sala_detail'),
     path('sala/vbc/<int:pk>/update/', SalaUpdateView.as_view(), name='vbc_sala_update'),
     path('sala/vbc/<int:pk>/delete/', SalaDeleteView.as_view(), name='vbc_sala_delete'),
-
+    # -----------------------------------------------------------------------------
+    # CLASE 23
+    # -----------------------------------------------------------------------------
+    path('crear-usuario/', user_creation_view, name='crear-usuario'),
+    path('login/', user_login_view, name='login'),
+    path('logout/', user_logout_view, name='logout'),
 ]
