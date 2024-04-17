@@ -28,5 +28,7 @@ def mi_funcion_que_es_una_vista_o_view(xx):
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", mi_funcion_que_es_una_vista_o_view),
-    path("bookings/", include("bookings.urls")), # conecto las URLS de `bookings` con las URLS generales
+    path(
+        "bookings/", include("bookings.urls")
+    ),  # conecto las URLS de `bookings` con las URLS generales
 ]

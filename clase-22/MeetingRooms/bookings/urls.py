@@ -22,7 +22,7 @@ from .views import (
     SalaDetailView,
     SalaDeleteView,
     SalaUpdateView,
-    SalaCreateView
+    SalaCreateView,
 )
 
 urlpatterns = [
@@ -46,10 +46,9 @@ urlpatterns = [
     path("sala/update/<sala_id>", sala_update_view, name="sala-update"),
     path("sala/buscar/", search_sala_view, name="sala-search"),
     # Vistas basadas en clases "VBC"
-    path('sala/vbc/list', SalaListView.as_view(), name='vbc_sala_list'),
-    path('sala/vbc/create/', SalaCreateView.as_view(), name='vbc_sala_create'),
-    path('sala/vbc/<int:pk>/detail', SalaDetailView.as_view(), name='vbc_sala_detail'),
-    path('sala/vbc/<int:pk>/update/', SalaUpdateView.as_view(), name='vbc_sala_update'),
-    path('sala/vbc/<int:pk>/delete/', SalaDeleteView.as_view(), name='vbc_sala_delete'),
-
+    path("sala/vbc/list", SalaListView.as_view(), name="vbc_sala_list"),
+    path("sala/vbc/create/", SalaCreateView.as_view(), name="vbc_sala_create"),
+    path("sala/vbc/<int:pk>/detail", SalaDetailView.as_view(), name="vbc_sala_detail"),
+    path("sala/vbc/<int:pk>/update/", SalaUpdateView.as_view(), name="vbc_sala_update"),
+    path("sala/vbc/<int:pk>/delete/", SalaDeleteView.as_view(), name="vbc_sala_delete"),
 ]

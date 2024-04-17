@@ -28,7 +28,7 @@ from .views import (
     # -----------------------------------------------------------------------------
     user_login_view,
     user_creation_view,
-    user_logout_view
+    user_logout_view,
 )
 
 urlpatterns = [
@@ -52,15 +52,15 @@ urlpatterns = [
     path("sala/update/<sala_id>", sala_update_view, name="sala-update"),
     path("sala/buscar/", search_sala_view, name="sala-search"),
     # Vistas basadas en clases "VBC"
-    path('sala/vbc/list', SalaListView.as_view(), name='vbc_sala_list'),
-    path('sala/vbc/create/', SalaCreateView.as_view(), name='vbc_sala_create'),
-    path('sala/vbc/<int:pk>/detail', SalaDetailView.as_view(), name='vbc_sala_detail'),
-    path('sala/vbc/<int:pk>/update/', SalaUpdateView.as_view(), name='vbc_sala_update'),
-    path('sala/vbc/<int:pk>/delete/', SalaDeleteView.as_view(), name='vbc_sala_delete'),
+    path("sala/vbc/list", SalaListView.as_view(), name="vbc_sala_list"),
+    path("sala/vbc/create/", SalaCreateView.as_view(), name="vbc_sala_create"),
+    path("sala/vbc/<int:pk>/detail", SalaDetailView.as_view(), name="vbc_sala_detail"),
+    path("sala/vbc/<int:pk>/update/", SalaUpdateView.as_view(), name="vbc_sala_update"),
+    path("sala/vbc/<int:pk>/delete/", SalaDeleteView.as_view(), name="vbc_sala_delete"),
     # -----------------------------------------------------------------------------
     # CLASE 23
     # -----------------------------------------------------------------------------
-    path('crear-usuario/', user_creation_view, name='crear-usuario'),
-    path('login/', user_login_view, name='login'),
-    path('logout/', user_logout_view, name='logout'),
+    path("crear-usuario/", user_creation_view, name="crear-usuario"),
+    path("login/", user_login_view, name="login"),
+    path("logout/", user_logout_view, name="logout"),
 ]

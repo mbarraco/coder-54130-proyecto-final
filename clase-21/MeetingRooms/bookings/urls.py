@@ -8,7 +8,7 @@ from .views import (
     search_with_form_view,
     create_with_form_view,
     create_sala_with_form_view,
-    detail_sala_view
+    detail_sala_view,
 )
 
 urlpatterns = [
@@ -19,6 +19,10 @@ urlpatterns = [
     # Clase 21: formularios
     path("buscar-con-formulario/", search_with_form_view, name="zzz"),
     path("crear-reserva-con-formulario/", create_with_form_view, name="yyy"),
-    path("crear-sala-con-formulario/", create_sala_with_form_view, name="crear-sala-con-form"),
+    path(
+        "crear-sala-con-formulario/",
+        create_sala_with_form_view,
+        name="crear-sala-con-form",
+    ),
     path("detail-sala/<sala_id>", detail_sala_view),
 ]

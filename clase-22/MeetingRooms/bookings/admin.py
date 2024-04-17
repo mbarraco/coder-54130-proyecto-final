@@ -6,4 +6,3 @@ from .models import Reserva, Sala
 
 admin.site.register(Reserva)
 admin.site.register(Sala)
-
