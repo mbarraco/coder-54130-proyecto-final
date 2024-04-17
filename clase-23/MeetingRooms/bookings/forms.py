@@ -7,8 +7,9 @@ class ReservaSearchForm(forms.Form):
     nombre_de_usuario = forms.CharField(max_length=50, required=True, label="Ingresar nombre de usuario")
 
 
-class ReservaCreateForm(forms.Form):
-    pass
+class SalaSearchForm(forms.Form):
+    nombre = forms.CharField(max_length=50, required=True, label="Ingresar nombre de la sala")
+
 
 
 class SalaCreateForm(forms.ModelForm):

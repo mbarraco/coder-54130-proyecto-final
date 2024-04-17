@@ -1,0 +1,26 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}Buscar Sala{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">Buscar Sala</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'sala-search' %}">  
+                            {% csrf_token %}
+                            {{ MIKEPORTNOY.as_p }}
+                            <button type="buscar" class="btn btn-primary">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

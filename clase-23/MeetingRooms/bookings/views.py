@@ -30,7 +30,7 @@ def create_sala_with_form_view(request):
 def home_view(request):
     return render(request, "bookings/home.html")
 
-
+@login_required
 def list_view(request):
     reservas = Reserva.objects.all()
     contexto_dict = {'todas_las_reservas': reservas}
@@ -118,9 +118,28 @@ def sala_update_view(request, sala_id):
             sala_a_editar.save()
             return redirect("sala-detail", sala_a_editar.id)
 
+
+from .forms import SalaSearchForm
+
 @login_required
 def search_sala_view(request):
-    return HttpResponse("not implemented!")
+    if request.method == "GET":
+        # devuelvo el formulario vacio
+        contexto = {"MIKEPORTNOY": SalaSearchForm() }
+        return render(request, "bookings/salas/form_search.html", contexto)
+    elif request.method == "POST":
+        form = SalaSearchForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            salas = Sala.objects.filter(nombre=nombre).all()
+            contexto = {"SANTIAGOMOTORIZADO": salas}
+            return render(request, "bookings/salas/list.html", contexto)
+
+
+    return render(request, "bookings/salas/form_search.html", contexto)
+
+
+
 
 
 # Vistas basadas en clases "VBC"
@@ -128,26 +147,29 @@ def search_sala_view(request):
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-class SalaListView(ListView):
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class SalaListView(LoginRequiredMixin, ListView):
     model = Sala
     template_name = 'bookings/vbc/sala_list.html'
     context_object_name = 'ADRIANDARGELOS'
 
 
-class SalaDetailView(DetailView):
+class SalaDetailView(LoginRequiredMixin, DetailView):
     model = Sala
     template_name = 'bookings/vbc/sala_detail.html'
     context_object_name = 'GUSTAVOCERATI'
 
 
-class SalaCreateView(CreateView):
+class SalaCreateView(LoginRequiredMixin, CreateView):
     model = Sala
     template_name = 'bookings/vbc/sala_form.html'
     fields = ['nombre', 'disponible', 'capacidad', 'descripcion']
     success_url = reverse_lazy('vbc_sala_list')
 
 
-class SalaUpdateView(UpdateView):
+class SalaUpdateView(LoginRequiredMixin, UpdateView):
     model = Sala
     template_name = 'bookings/vbc/sala_form.html'
     fields = ['nombre', 'disponible', 'capacidad', 'descripcion']
@@ -156,7 +178,7 @@ class SalaUpdateView(UpdateView):
 
 
 
-class SalaDeleteView(DeleteView):
+class SalaDeleteView(LoginRequiredMixin, DeleteView):
     model = Sala
     template_name = 'bookings/vbc/sala_confirm_delete.html'
     success_url = reverse_lazy('vbc_sala_list')
@@ -168,7 +190,6 @@ class SalaDeleteView(DeleteView):
 # -----------------------------------------------------------------------------
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib import messages
 
 def user_login_view(request):
     if request.method == "GET":
@@ -192,7 +213,6 @@ def user_creation_view(request):
         form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        breakpoint()
         if form.is_valid():
             user = form.save()
             login(request, user)
