@@ -68,7 +68,23 @@ def sala_search_view(request):
         form = SalaSearchForm(request.POST)
         if form.is_valid():
             nombre_de_sala = form.cleaned_data["nombre"]
-            salas_encontradas = Sala.objects.filter(nombre=nombre_de_sala).all()
+            descartar_no_disponibles = form.cleaned_data["disponible"]
+            capacidad_minima = form.cleaned_data["capacidad_minima"]
+            tipo_de_sala = form.cleaned_data["tipo_de_sala"]
+
+            salas_encontradas = Sala.objects.filter(nombre__icontains=nombre_de_sala)
+
+            if descartar_no_disponibles:
+                salas_encontradas = salas_encontradas.filter( disponible=True)
+
+            if capacidad_minima:
+                salas_encontradas = salas_encontradas.filter(capacidad__gte=capacidad_minima)
+
+            if tipo_de_sala:
+                salas_encontradas = salas_encontradas.filter(tipo=tipo_de_sala)
+
+
+
             contexto_dict = {"ADRIANDARGELOS": salas_encontradas}
             return render(request, "bookings/vbc/sala_list.html", contexto_dict)
         else:

@@ -9,7 +9,7 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"Avatar for {self.user.username}"
-    
+
 
 class Sala(models.Model):
     class Tipo(models.TextChoices):
@@ -33,7 +33,7 @@ class Sala(models.Model):
 
 class Reserva(models.Model):
     nombre_de_usuario = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    sala = models.ForeignKey(Sala, on_delete=models.CASCADE)
+    sala = models.ForeignKey(Sala, on_delete=models.CASCADE, related_name="reservas")
     fecha = models.DateField(default=timezone.now)
     hora_inicio = models.TimeField(default=timezone.now)
     hora_fin = models.TimeField(default=timezone.now)
